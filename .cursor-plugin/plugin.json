@@ -1,0 +1,42 @@
+{
+  "name": "youtube-transcript-cursor-plugin",
+  "displayName": "YouTube Transcript",
+  "version": "1.0.0",
+  "description": "YouTube transcripts, video/channel search, channel browsing, and playlist extraction inside Cursor - bundles the getyoutubetranscript.com remote MCP server plus skills, commands, rules, and a research agent. API key or OAuth sign-in, free tier, no card required.",
+  "author": {
+    "name": "TubeAgentKit",
+    "email": "hello@tubeagentkit.dev"
+  },
+  "homepage": "https://getyoutubetranscript.com",
+  "repository": "https://github.com/tubeagentkit/youtube-transcript-cursor-plugin",
+  "license": "MIT",
+  "keywords": [
+    "youtube",
+    "transcript",
+    "captions",
+    "subtitles",
+    "video-search",
+    "channel-search",
+    "playlists",
+    "mcp",
+    "cursor-plugin"
+  ],
+  "category": "developer-tools",
+  "tags": ["productivity", "content", "api", "ai-agents"],
+  "variables": {
+    "type": "object",
+    "properties": {
+      "YOUTUBE_TRANSCRIPT_API_KEY": {
+        "type": "string",
+        "title": "GetYouTubeTranscript API key",
+        "description": "Optional - only needed if you don't connect the bundled MCP server via OAuth instead. Get a free key (100 credits, no card) at https://getyoutubetranscript.com/dashboard. Starts with sk_live_."
+      }
+    },
+    "required": []
+  },
+  "skills": "./skills/",
+  "rules": "./rules/",
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "mcpServers": "./mcp.json"
+}

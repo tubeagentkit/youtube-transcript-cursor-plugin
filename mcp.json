@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "youtube-transcript": {
+      "type": "http",
+      "url": "https://getyoutubetranscript.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${YOUTUBE_TRANSCRIPT_API_KEY}"
+      }
+    }
+  }
+}

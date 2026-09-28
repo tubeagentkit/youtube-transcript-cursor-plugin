@@ -1,0 +1,19 @@
+---
+description: API key and MCP connection setup for the getyoutubetranscript.com YouTube Transcript plugin. Apply when connecting the bundled MCP server, working with transcript fetching, or touching env/secret files.
+alwaysApply: false
+globs: ["**/*transcript*", "**/*youtube*", "**/.env*", "**/.env.local", "**/.cursor-plugin/**"]
+---
+
+# API key setup
+
+This plugin bundles a remote MCP server at `https://getyoutubetranscript.com/api/mcp`, which supports two independent auth methods - use either one, not both:
+
+1. **API key (works everywhere).** Get a free key (100 credits, no card) at <https://getyoutubetranscript.com/dashboard>, or have the agent create one via the `fetch-transcript` skill's email+OTP signup flow. Set it as the `YOUTUBE_TRANSCRIPT_API_KEY` plugin variable (or environment variable, for the REST API fallback) - this plugin's `mcp.json` substitutes it into the `Authorization: Bearer` header automatically.
+2. **OAuth sign-in (no key to manage).** Connect the MCP server and approve the consent screen when prompted - no key needed at all. Prefer this if you don't want to manage a secret.
+
+Regardless of which method is used:
+
+1. Never commit an API key to version control - it must live in an environment variable, a `.env.local` file that's gitignored, or the plugin's own variable storage, never hardcoded in a script, rule, or command file.
+2. Never print/echo a live key in full back to the user in a way that could get pasted somewhere public (e.g. a shared chat log, an issue, a commit message) - the dashboard is the source of truth for retrieving it again.
+3. If a key was minted for the user during this session (via the signup flow), ask before persisting it anywhere beyond the current session (e.g. a shell profile).
+4. `401 MISSING_API_KEY` / `INVALID_API_KEY` from the REST API, or an MCP auth failure, means the key is missing, wrong, or revoked - re-check the plugin variable / environment variable rather than retrying the same call.
