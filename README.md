@@ -108,11 +108,12 @@ Or use the slash commands directly:
 
 Other ways to use the [GetYouTubeTranscript API](https://getyoutubetranscript.com):
 
-- [youtube-mcp](https://github.com/tubeagentkit/youtube-mcp) - the remote MCP server this plugin bundles, for Claude, ChatGPT, Cursor, and VS Code directly
-- [youtube-transcript-skills](https://github.com/tubeagentkit/youtube-transcript-skills) - the same functionality as a portable Agent Skill for Claude Code, Codex, and any Agent Skills-compatible tool
-- [youtube-transcript-api-python](https://github.com/tubeagentkit/youtube-transcript-api-python) - Python SDK
-- [youtube-transcript-api-node](https://github.com/tubeagentkit/youtube-transcript-api-node) - Node.js / TypeScript SDK
-- [youtube-transcript-api](https://github.com/tubeagentkit) - the underlying REST API
+- [youtube-transcript-api](https://github.com/tubeagentkit/youtube-transcript-api): YouTube Transcript API docs, endpoint reference, OpenAPI spec and examples in curl, Python, JavaScript, Go and PHP
+- [youtube-transcript-api-python](https://github.com/tubeagentkit/youtube-transcript-api-python): YouTube Transcript API SDK for Python
+- [youtube-transcript-api-node](https://github.com/tubeagentkit/youtube-transcript-api-node): YouTube Transcript API SDK for Node.js / TypeScript
+- [youtube-mcp](https://github.com/tubeagentkit/youtube-mcp): Remote YouTube MCP server for Claude, ChatGPT, Cursor and VS Code
+- [youtube-transcript-skills](https://github.com/tubeagentkit/youtube-transcript-skills): YouTube transcript Agent Skill for Claude Code, Cursor, Codex and OpenClaw
+- [n8n-nodes-getyoutubetranscript](https://github.com/tubeagentkit/n8n-nodes-getyoutubetranscript): YouTube transcript n8n community node, also usable as an AI Agent tool
 
 ## Disclosure
 
