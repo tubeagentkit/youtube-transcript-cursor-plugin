@@ -2,10 +2,9 @@
   "name": "youtube-transcript-cursor-plugin",
   "displayName": "YouTube Transcript",
   "version": "1.0.0",
-  "description": "YouTube transcripts, video/channel search, channel browsing, and playlist extraction inside Cursor - bundles the getyoutubetranscript.com remote MCP server plus skills, commands, rules, and a research agent. API key or OAuth sign-in, free tier, no card required.",
+  "description": "YouTube transcripts, video/channel search, channel browsing, and playlist extraction inside Cursor - bundles the getyoutubetranscript.com remote MCP server plus skills, commands, rules, and a research agent. Free API key (100 credits, no card).",
   "author": {
-    "name": "TubeAgentKit",
-    "email": "hello@tubeagentkit.dev"
+    "name": "TubeAgentKit"
   },
   "homepage": "https://getyoutubetranscript.com",
   "repository": "https://github.com/tubeagentkit/youtube-transcript-cursor-plugin",

@@ -5,26 +5,30 @@
 
 A [Cursor Plugin](https://cursor.com/docs/plugins) that gives your Cursor agent YouTube transcripts, video/channel search, channel browsing, and playlist extraction - no local server to run, no Google API key or quota to manage. It bundles the hosted [`getyoutubetranscript.com`](https://getyoutubetranscript.com) MCP server plus skills, slash commands, rules, and a research agent so the setup and the conventions ship together.
 
-**Free tier - 100 credits on signup, no card required. API key or OAuth sign-in, your choice.**
+**Free tier - 100 credits on signup, no card required.**
 
 ---
 
 ## Install
 
+Once the plugin is listed on the Cursor marketplace (submitted, pending review):
+
 ```
 /add-plugin youtube-transcript-cursor-plugin
 ```
 
-Or from the Cursor UI: **Customize** in the sidebar -> search for **YouTube Transcript** -> **Install** (choose project or user scope). To install straight from this repo before it's on the marketplace, use **Dashboard -> Plugins & MCPs -> Team Marketplaces -> Add Marketplace -> Import from Repo** and paste this repository's URL, or clone it into `~/.cursor/plugins/local/youtube-transcript-cursor-plugin/`.
+or **Customize** in the sidebar -> search for **YouTube Transcript** -> **Install** (choose project or user scope).
+
+Right now, install straight from this repo: use **Dashboard -> Plugins & MCPs -> Team Marketplaces -> Add Marketplace -> Import from Repo** and paste this repository's URL, or clone it into `~/.cursor/plugins/local/youtube-transcript-cursor-plugin/`.
 
 ---
 
 ## Setup
 
-The bundled MCP server (`https://getyoutubetranscript.com/api/mcp`) supports two auth methods - pick one:
+The bundled MCP server (`https://getyoutubetranscript.com/api/mcp`) authenticates with an API key:
 
 1. **API key.** Get a free key (100 credits, no card) at the [dashboard](https://getyoutubetranscript.com/dashboard), or just ask your agent for a transcript with no key configured - the `fetch-transcript` skill can sign you up by email + one-time code without you leaving the conversation. Set the key as this plugin's `YOUTUBE_TRANSCRIPT_API_KEY` variable (Cursor prompts for it on install, or set it later in plugin settings).
-2. **OAuth.** Connect the MCP server and approve the consent screen when prompted - no key to manage at all.
+2. **OAuth (alternative).** The server also supports OAuth. If you'd rather not manage a key, add `https://getyoutubetranscript.com/api/mcp` directly in Cursor's MCP settings without a header and approve the consent screen when Cursor prompts for sign-in.
 
 ---
 

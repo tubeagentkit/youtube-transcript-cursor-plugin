@@ -9,7 +9,7 @@ globs: ["**/*transcript*", "**/*youtube*", "**/.env*", "**/.env.local", "**/.cur
 This plugin bundles a remote MCP server at `https://getyoutubetranscript.com/api/mcp`, which supports two independent auth methods - use either one, not both:
 
 1. **API key (works everywhere).** Get a free key (100 credits, no card) at <https://getyoutubetranscript.com/dashboard>, or have the agent create one via the `fetch-transcript` skill's email+OTP signup flow. Set it as the `YOUTUBE_TRANSCRIPT_API_KEY` plugin variable (or environment variable, for the REST API fallback) - this plugin's `mcp.json` substitutes it into the `Authorization: Bearer` header automatically.
-2. **OAuth sign-in (no key to manage).** Connect the MCP server and approve the consent screen when prompted - no key needed at all. Prefer this if you don't want to manage a secret.
+2. **OAuth sign-in (alternative).** The server also supports OAuth: add `https://getyoutubetranscript.com/api/mcp` directly in Cursor's MCP settings without an Authorization header, and approve the consent screen when Cursor prompts for sign-in.
 
 Regardless of which method is used:
 
