@@ -17,7 +17,7 @@ Provide a YouTube URL (`youtube.com/watch?v=...`, `youtu.be/...`, `/shorts/...`)
 
 ## Behavior
 
-Follow the `fetch-transcript` skill: prefer the bundled `youtube-transcript` MCP server's `get_youtube_transcript` tool; fall back to the REST API (`GET /api/v1/transcript`) if the MCP server isn't connected. Return the transcript as plain text along with the video's title and author. Note if the video has no transcript in the requested language, and never fabricate per-line timestamps - this API doesn't provide them.
+Follow the `fetch-transcript` skill: prefer the bundled `youtube-transcript` MCP server's `get_youtube_transcript` tool; fall back to the REST API (`GET /api/v1/transcript`) if the MCP server isn't connected. Return the transcript as plain text along with the video's title and author. Note if the video has no transcript in the requested language, and never fabricate timestamps. If the user wants timestamps, call `get_youtube_transcript` with `timestamps: true` (REST: `timestamps=true`).
 
 ## Example
 

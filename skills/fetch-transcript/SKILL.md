@@ -21,9 +21,12 @@ If the `youtube-transcript` MCP server (bundled with this plugin) is connected, 
 get_youtube_transcript({
   video_url: "<the URL or 11-char video ID the user gave>",
   language: "en",          // optional, defaults to "en" - only set if the user asked for a specific language
-  send_metadata: true       // optional, defaults to true
+  send_metadata: true,      // optional, defaults to true
+  timestamps: false         // optional, defaults to false - set true when the user wants timestamps, wants to find or quote where something is said, or wants a timeline or chapter breakdown
 })
 ```
+
+With `timestamps: true`, each caption line comes back on its own line starting with its start time, like `[0:03] some text` (`h:mm:ss` past an hour). Same credit cost.
 
 `video_url` accepts a bare 11-char video ID or any full YouTube URL (`youtube.com/watch?v=...`, `youtu.be/...`, `/shorts/...`) - pass it through as-is, don't parse it yourself. The MCP session is authenticated by whatever the user set up when they connected the server (API key header or OAuth) - you don't need to attach credentials yourself when calling the tool.
 
@@ -63,6 +66,8 @@ curl -s "https://getyoutubetranscript.com/api/v1/transcript?v=<VIDEO_ID_OR_URL>&
   -H "Authorization: Bearer $YOUTUBE_TRANSCRIPT_API_KEY"
 ```
 
+Add `&timestamps=true` to also get `data.segments`.
+
 Successful response:
 
 ```json
@@ -81,7 +86,7 @@ Successful response:
 }
 ```
 
-`transcript` is the full spoken text as one plain string - there is no per-line timestamp breakdown in this API. If the user specifically needs timestamps, tell them that's a real product limitation right now, not a bug - don't invent fake timestamps.
+`transcript` is the full spoken text as one plain string. With `timestamps=true`, the response also has `data.segments`, an array of `{start, duration, text}` with `start` and `duration` in seconds, for example `{"start": 3.96, "duration": 4.56, "text": "So, Reed, education, which a lot of"}`. Don't invent timestamps when the option isn't used.
 
 ## Errors
 
