@@ -76,15 +76,21 @@ Successful response:
   "data": {
     "video_id": "jNQXAC9IVRw",
     "language_code": "en",
+    "requested_language": "en",
+    "caption_type": "manual",
     "title": "Me at the zoo",
     "author_name": "jawed",
     "author_url": "https://www.youtube.com/channel/UC4Qob...",
     "thumbnail_url": "https://...",
     "transcript": "All right, so here we are...",
-    "word_count": 39
+    "word_count": 39,
+    "cached": true,
+    "fetched_at": "2026-09-20T03:10:58.938Z"
   }
 }
 ```
+
+If `language_code` differs from `requested_language`, the video didn't have that language: say so rather than presenting it as a translation. `caption_type: "auto"` means YouTube speech recognition, so names and technical terms may be misheard. The MCP tool states the same in its `## Language` and `## Captions` header lines.
 
 `transcript` is the full spoken text as one plain string. With `timestamps=true`, the response also has `data.segments`, an array of `{start, duration, text}` with `start` and `duration` in seconds, for example `{"start": 3.96, "duration": 4.56, "text": "So, Reed, education, which a lot of"}`. Don't invent timestamps when the option isn't used.
 

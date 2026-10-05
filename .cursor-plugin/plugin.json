@@ -1,7 +1,7 @@
 {
   "name": "youtube-transcript-cursor-plugin",
   "displayName": "YouTube Transcript",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "YouTube transcripts, video/channel search, channel browsing, and playlist extraction inside Cursor - bundles the getyoutubetranscript.com remote MCP server plus skills, commands, rules, and a research agent. Free API key (100 credits, no card).",
   "author": {
     "name": "TubeAgentKit"
