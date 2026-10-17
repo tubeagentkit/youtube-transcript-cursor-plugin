@@ -66,7 +66,7 @@ The bundled MCP server (`https://getyoutubetranscript.com/api/mcp`) authenticate
 
 ### MCP server
 
-Bundled via [`mcp.json`](./mcp.json) - the remote [`tubeagentkit/youtube-mcp`](https://github.com/tubeagentkit/youtube-mcp) server, exposing `get_youtube_transcript`, `search_youtube`, `get_channel_latest_videos`, `search_channel_videos`, `list_channel_videos`, `list_playlist_videos`, and `get_credits`.
+Bundled via [`mcp.json`](./mcp.json) - the remote [`tubeagentkit/youtube-mcp`](https://github.com/tubeagentkit/youtube-mcp) server, exposing `get_youtube_transcript`, `get_transcript_languages`, `search_youtube`, `get_channel_latest_videos`, `search_channel_videos`, `list_channel_videos`, `list_playlist_videos`, and `get_credits`.
 
 ---
 

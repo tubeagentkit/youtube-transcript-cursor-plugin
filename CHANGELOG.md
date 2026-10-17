@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The bundled MCP server now has `get_transcript_languages` (1 credit): lists the caption languages a video offers. `fetch-transcript` skill and README mention it
+
 ## 1.0.0 (2026-09-28)
 
 - Initial release

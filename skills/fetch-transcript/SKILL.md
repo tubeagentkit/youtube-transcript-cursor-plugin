@@ -90,7 +90,7 @@ Successful response:
 }
 ```
 
-If `language_code` differs from `requested_language`, the video didn't have that language: say so rather than presenting it as a translation. `caption_type: "auto"` means YouTube speech recognition, so names and technical terms may be misheard. The MCP tool states the same in its `## Language` and `## Captions` header lines.
+If `language_code` differs from `requested_language`, the video didn't have that language: say so rather than presenting it as a translation. `caption_type: "auto"` means YouTube speech recognition, so names and technical terms may be misheard. The MCP tool states the same in its `## Language` and `## Captions` header lines. To see which caption languages a video offers before asking for a specific one, call `get_transcript_languages` (REST: `GET /transcript/languages`; 1 credit). Skip it for an ordinary English request.
 
 `transcript` is the full spoken text as one plain string. With `timestamps=true`, the response also has `data.segments`, an array of `{start, duration, text}` with `start` and `duration` in seconds, for example `{"start": 3.96, "duration": 4.56, "text": "So, Reed, education, which a lot of"}`. Don't invent timestamps when the option isn't used.
 
