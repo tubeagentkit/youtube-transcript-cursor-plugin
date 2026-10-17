@@ -1,6 +1,6 @@
 ---
 name: channel-playlist-research
-description: Use when the user wants to resolve a channel handle, browse a channel's recent or full upload history, search inside one channel's videos, or list every video in a playlist. Calls get_channel_latest_videos, search_channel_videos, list_channel_videos, and list_playlist_videos from the bundled getyoutubetranscript.com MCP server (REST API fallback available) - channel/playlist listing is free, search and full-history pagination cost credits.
+description: Use when the user wants to resolve a channel handle, browse a channel's recent or full upload history, search inside one channel's videos, or list every video in a playlist. Calls get_channel_latest_videos, search_channel_videos, list_channel_videos, and list_playlist_videos from the bundled getyoutubetranscript.com MCP server (REST API fallback available) - every call costs 1 credit per successful call (per page when paginated); only `get_credits` is free.
 ---
 
 # Channel & playlist research
@@ -9,11 +9,11 @@ Covers everything about a YouTube channel or playlist short of fetching an indiv
 
 ## Trigger
 
-- "What has @channel posted recently?" -> latest videos (free)
+- "What has @channel posted recently?" -> latest videos (1 credit)
 - "List every video @channel has ever uploaded" -> full upload history (paginated)
 - "Search @channel's videos for X" -> in-channel search (paginated)
 - "List all videos in this playlist" -> playlist contents (paginated)
-- "What's this channel's ID / is this the right channel?" -> resolve a handle/URL to a canonical channel ID (free)
+- "What's this channel's ID / is this the right channel?" -> resolve a handle/URL to a canonical channel ID (1 credit)
 
 ## Preferred path: the bundled MCP tools
 
@@ -21,7 +21,7 @@ If the `youtube-transcript` MCP server is connected, use whichever tool matches 
 
 | Tool | Use for | Cost |
 |---|---|---|
-| `get_channel_latest_videos({ channel })` | Channel metadata + its home tab's recent uploads | Free |
+| `get_channel_latest_videos({ channel })` | Channel metadata + its home tab's recent uploads | 1 credit |
 | `list_channel_videos({ channel \| continuation })` | Every video the channel has ever uploaded, paginated | 1 credit/page |
 | `search_channel_videos({ channel, query \| continuation })` | Search within one channel's videos | 1 credit/page |
 | `list_playlist_videos({ playlist \| continuation })` | Every video in a playlist | 1 credit/page |
@@ -34,8 +34,8 @@ Same base URL and auth as `fetch-transcript` (`https://getyoutubetranscript.com/
 
 | Endpoint | Params | Cost |
 |---|---|---|
-| `GET /resolve?handle=@mkbhd` | `handle` (ID, URL, or @handle) | Free |
-| `GET /channel/latest?channel=@mkbhd` | `channel` | Free |
+| `GET /resolve?handle=@mkbhd` | `handle` (ID, URL, or @handle) | 1 credit |
+| `GET /channel/latest?channel=@mkbhd` | `channel` | 1 credit |
 | `GET /channel/videos?channel=@mkbhd` (or `&continuation=`) | `channel` or `continuation` | 1 credit/page |
 | `GET /channel/search?channel=@mkbhd&q=iphone` (or `&continuation=`) | `channel`+`q`, or `continuation` | 1 credit/page |
 | `GET /playlist?list=<id or URL>` (or `&continuation=`) | `list` or `continuation` | 1 credit/page |
@@ -44,7 +44,7 @@ See the `fetch-transcript` skill for how to obtain `YOUTUBE_TRANSCRIPT_API_KEY`,
 
 ## Which one to reach for
 
-- Just want to know what's new? `get_channel_latest_videos` / `channel/latest` - it's free, use it before reaching for the paginated full-history tool.
+- Just want to know what's new? `get_channel_latest_videos` / `channel/latest` - it's one credit for the whole latest shelf, use it before reaching for the paginated full-history tool.
 - Need the complete history (for an archive, a database, or "has this channel ever covered X")? `list_channel_videos` / `channel/videos`.
 - Only care about one topic within a channel? `search_channel_videos` / `channel/search` - cheaper than paginating the full history and filtering yourself.
 - Before paginating a large channel or playlist, consider checking remaining balance first (`get_credits` tool, or `GET /credits`, both free) so a long pagination loop doesn't die partway through on a `402`.

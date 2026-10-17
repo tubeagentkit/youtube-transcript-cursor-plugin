@@ -100,7 +100,7 @@ Or use the slash commands directly:
 | **Monthly** | $5/month | 1,000 credits/month | 200 req/min |
 | **Annual** | $4.50/mo ($54/yr) | 1,000 credits/month | 300 req/min |
 
-1 credit = 1 successful request. Failed calls are never charged. `get_channel_latest_videos`, `resolve`, and `get_credits` are always free. [Manage billing ->](https://getyoutubetranscript.com/dashboard)
+1 credit = 1 successful request. Failed calls are never charged. Only `get_credits` is free. [Manage billing ->](https://getyoutubetranscript.com/dashboard)
 
 ---
 
