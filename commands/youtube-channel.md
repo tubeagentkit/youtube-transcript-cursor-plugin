@@ -19,7 +19,7 @@ Browse or search a YouTube channel.
 
 ## Behavior
 
-Follow the `channel-playlist-research` skill: prefer the bundled `youtube-transcript` MCP server's `get_channel_latest_videos`, `list_channel_videos`, or `search_channel_videos` tools (matching the flag used); fall back to the corresponding REST endpoints (`/channel/latest`, `/channel/videos`, `/channel/search`) if the MCP server isn't connected. For `--all` or `--search`, warn the user before paginating a very large channel, since each page after the first costs a credit.
+Follow the `channel-playlist-research` skill: prefer the bundled `youtube-transcript` MCP server's `get_channel_latest_videos`, `list_channel_videos`, or `search_channel_videos` tools (the same skill also covers a channel's playlists, posts and banner) (matching the flag used); fall back to the corresponding REST endpoints (`/channel/latest`, `/channel/videos`, `/channel/search`) if the MCP server isn't connected. For `--all` or `--search`, warn the user before paginating a very large channel, since each page after the first costs a credit.
 
 ## Example
 

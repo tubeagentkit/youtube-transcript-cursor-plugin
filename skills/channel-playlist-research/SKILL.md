@@ -1,6 +1,6 @@
 ---
 name: channel-playlist-research
-description: Use when the user wants to resolve a channel handle, browse a channel's recent or full upload history, search inside one channel's videos, or list every video in a playlist. Calls get_channel_latest_videos, search_channel_videos, list_channel_videos, and list_playlist_videos from the bundled getyoutubetranscript.com MCP server (REST API fallback available) - every call costs 1 credit per successful call (per page when paginated); only `get_credits` is free.
+description: Use when the user wants to resolve a channel handle, browse a channel's recent or full upload history (including Shorts, live streams or its most popular videos), see its playlists, community posts or banner, search inside one channel's videos, list every video in a playlist, find videos related to one, or read a video's estimated dislikes. Calls get_channel_latest_videos, search_channel_videos, list_channel_videos, list_channel_playlists, list_channel_posts, get_channel_banner, list_playlist_videos, get_related_videos and get_video_dislikes from the bundled getyoutubetranscript.com MCP server (REST API fallback available) - every call costs 1 credit per successful call (per page when paginated); only `get_credits` is free.
 ---
 
 # Channel & playlist research
@@ -22,7 +22,12 @@ If the `youtube-transcript` MCP server is connected, use whichever tool matches 
 | Tool | Use for | Cost |
 |---|---|---|
 | `get_channel_latest_videos({ channel })` | Channel metadata + its home tab's recent uploads | 1 credit |
-| `list_channel_videos({ channel \| continuation })` | Every video the channel has ever uploaded, paginated | 1 credit/page |
+| `list_channel_videos({ channel \| continuation, tab, sort })` | The channel's uploads, paginated. `tab`: `videos` (default), `shorts`, `streams` (Live). `sort`: `latest` (default), `popular`, `oldest`. Both first page only | 1 credit/page |
+| `list_channel_playlists({ channel \| continuation })` | The channel's playlists (pass an `id` to `list_playlist_videos`) | 1 credit/page |
+| `list_channel_posts({ channel \| continuation })` | The channel's community posts | 1 credit/page |
+| `get_channel_banner({ channel })` | Banner (original and every crop size) and avatar | 1 credit |
+| `get_related_videos({ video_url })` | The videos YouTube suggests next to a video | 1 credit |
+| `get_video_dislikes({ video_url })` | Estimated likes and dislikes (YouTube no longer publishes dislikes) | 1 credit |
 | `search_channel_videos({ channel, query \| continuation })` | Search within one channel's videos | 1 credit/page |
 | `list_playlist_videos({ playlist \| continuation })` | Every video in a playlist | 1 credit/page |
 
@@ -36,7 +41,12 @@ Same base URL and auth as `fetch-transcript` (`https://getyoutubetranscript.com/
 |---|---|---|
 | `GET /resolve?handle=@mkbhd` | `handle` (ID, URL, or @handle) | 1 credit |
 | `GET /channel/latest?channel=@mkbhd` | `channel` | 1 credit |
-| `GET /channel/videos?channel=@mkbhd` (or `&continuation=`) | `channel` or `continuation` | 1 credit/page |
+| `GET /channel/videos?channel=@mkbhd` (or `&continuation=`) | `channel` or `continuation`; optional `tab`, `sort` on a first page | 1 credit/page |
+| `GET /channel/playlists?channel=@mkbhd` (or `&continuation=`) | `channel` or `continuation` | 1 credit/page |
+| `GET /channel/posts?channel=@mkbhd` (or `&continuation=`) | `channel` or `continuation` | 1 credit/page |
+| `GET /channel/banner?channel=@mkbhd` | `channel` | 1 credit |
+| `GET /video/related?v=<id or URL>` | `v` | 1 credit |
+| `GET /video/dislikes?v=<id or URL>` | `v` | 1 credit |
 | `GET /channel/search?channel=@mkbhd&q=iphone` (or `&continuation=`) | `channel`+`q`, or `continuation` | 1 credit/page |
 | `GET /playlist?list=<id or URL>` (or `&continuation=`) | `list` or `continuation` | 1 credit/page |
 
@@ -45,6 +55,6 @@ See the `fetch-transcript` skill for how to obtain `YOUTUBE_TRANSCRIPT_API_KEY`,
 ## Which one to reach for
 
 - Just want to know what's new? `get_channel_latest_videos` / `channel/latest` - it's one credit for the whole latest shelf, use it before reaching for the paginated full-history tool.
-- Need the complete history (for an archive, a database, or "has this channel ever covered X")? `list_channel_videos` / `channel/videos`.
+- Need the complete history (for an archive, a database, or "has this channel ever covered X")? `list_channel_videos` / `channel/videos`. Add `sort=popular` for the most-viewed first, or `tab=shorts` / `tab=streams` for Shorts or live streams.
 - Only care about one topic within a channel? `search_channel_videos` / `channel/search` - cheaper than paginating the full history and filtering yourself.
 - Before paginating a large channel or playlist, consider checking remaining balance first (`get_credits` tool, or `GET /credits`, both free) so a long pagination loop doesn't die partway through on a `402`.
