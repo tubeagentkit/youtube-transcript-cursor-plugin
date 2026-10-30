@@ -1,6 +1,6 @@
 ---
 name: fetch-transcript
-description: Use when the user wants a YouTube video's transcript fetched, or wants to summarize/analyze/quote a YouTube video by its spoken content. Calls the get_youtube_transcript tool from the bundled getyoutubetranscript.com MCP server (falls back to the REST API if the MCP server isn't connected) - requires an API key or an OAuth-connected MCP session, free tier available.
+description: Use when the user wants a YouTube video's transcript fetched, or wants to summarize/analyze/quote a YouTube video by its spoken content. Calls the get_youtube_transcript tool from the bundled getyoutubetranscript.com MCP server (falls back to the REST API if the MCP server isn't connected) - requires an API key or an OAuth-connected MCP session (100 credits on sign-up).
 ---
 
 # Fetch transcript

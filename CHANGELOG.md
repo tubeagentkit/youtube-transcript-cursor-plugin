@@ -4,7 +4,7 @@
 
 - README pricing table now lists the developer plans (Starter $19, Pro $49, Scale $99) next to Monthly and Annual
 - Fixed two cost statements: only `get_credits` is free, and a channel lookup costs 1 credit
-- Sign-up wording now reads "100 credits on sign-up, no card"
+- Sign-up wording now reads "100 credits on sign-up, no card", including the fetch-transcript and search-youtube skill descriptions
 
 ## Unreleased (earlier)
 

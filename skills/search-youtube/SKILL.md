@@ -1,6 +1,6 @@
 ---
 name: search-youtube
-description: Use when the user wants to search YouTube - for videos on a topic, or for a channel by name/handle. Calls the search_youtube tool from the bundled getyoutubetranscript.com MCP server (falls back to GET /search on the REST API) - requires an API key or an OAuth-connected MCP session, free tier available.
+description: Use when the user wants to search YouTube - for videos on a topic, or for a channel by name/handle. Calls the search_youtube tool from the bundled getyoutubetranscript.com MCP server (falls back to GET /search on the REST API) - requires an API key or an OAuth-connected MCP session (100 credits on sign-up).
 ---
 
 # Search YouTube
