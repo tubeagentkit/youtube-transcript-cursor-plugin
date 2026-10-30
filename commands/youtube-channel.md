@@ -13,7 +13,7 @@ Browse or search a YouTube channel.
 /youtube-channel <@handle, channel URL, or UC... ID> [--all | --search <query>]
 ```
 
-- No flag: return channel metadata plus its recent uploads (free).
+- No flag: return channel metadata plus its recent uploads (1 credit).
 - `--all`: paginate the channel's complete upload history.
 - `--search <query>`: search within the channel's videos for a query.
 

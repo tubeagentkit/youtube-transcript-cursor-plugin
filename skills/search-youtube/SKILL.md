@@ -40,7 +40,7 @@ curl -s "https://getyoutubetranscript.com/api/v1/search?q=<query>&type=video&cou
 
 See the `fetch-transcript` skill for how to obtain `YOUTUBE_TRANSCRIPT_API_KEY` if it isn't already set.
 
-Cost: 1 credit per page (free tier included). Errors follow the same `{success, code, message}` shape as every other endpoint - see `fetch-transcript`'s error table for the common codes (401/402/429/503).
+Cost: 1 credit per page. Errors follow the same `{success, code, message}` shape as every other endpoint - see `fetch-transcript`'s error table for the common codes (401/402/429/503).
 
 ## After searching
 

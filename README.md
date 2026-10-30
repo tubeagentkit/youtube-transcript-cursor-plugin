@@ -5,7 +5,7 @@
 
 A [Cursor Plugin](https://cursor.com/docs/plugins) that gives your Cursor agent YouTube transcripts, video/channel search, channel browsing, and playlist extraction - no local server to run, no Google API key or quota to manage. It bundles the hosted [`getyoutubetranscript.com`](https://getyoutubetranscript.com) MCP server plus skills, slash commands, rules, and a research agent so the setup and the conventions ship together.
 
-**Free tier - 100 credits on signup, no card required.**
+**100 credits on sign-up, no card required.**
 
 ---
 
@@ -27,7 +27,7 @@ Right now, install straight from this repo: use **Dashboard -> Plugins & MCPs ->
 
 The bundled MCP server (`https://getyoutubetranscript.com/api/mcp`) authenticates with an API key:
 
-1. **API key.** Get a free key (100 credits, no card) at the [dashboard](https://getyoutubetranscript.com/dashboard), or just ask your agent for a transcript with no key configured - the `fetch-transcript` skill can sign you up by email + one-time code without you leaving the conversation. Set the key as this plugin's `YOUTUBE_TRANSCRIPT_API_KEY` variable (Cursor prompts for it on install, or set it later in plugin settings).
+1. **API key.** Create a key (100 credits on sign-up, no card) at the [dashboard](https://getyoutubetranscript.com/dashboard), or just ask your agent for a transcript with no key configured - the `fetch-transcript` skill can sign you up by email + one-time code without you leaving the conversation. Set the key as this plugin's `YOUTUBE_TRANSCRIPT_API_KEY` variable (Cursor prompts for it on install, or set it later in plugin settings).
 2. **OAuth (alternative).** The server also supports OAuth. If you'd rather not manage a key, add `https://getyoutubetranscript.com/api/mcp` directly in Cursor's MCP settings without a header and approve the consent screen when Cursor prompts for sign-in.
 
 ---
@@ -96,9 +96,10 @@ Or use the slash commands directly:
 
 | Plan | Price | Credits | Rate Limit |
 |---|---|---|---|
-| **Free** | $0 | 100 credits on signup | 60 req/min |
-| **Monthly** | $5/month | 1,000 credits/month | 200 req/min |
-| **Annual** | $4.50/mo ($54/yr) | 1,000 credits/month | 300 req/min |
+| **Sign-up** | $0 | 100 credits, no card | 60 req/min |
+| **Starter** | $19/month | 7,500 credits/month | 300 req/min |
+| **Pro** | $49/month | 25,000 credits/month | 400 req/min |
+| **Scale** | $99/month | 60,000 credits/month | 600 req/min |
 
 1 credit = 1 successful request. Failed calls are never charged. Only `get_credits` is free. [Manage billing ->](https://getyoutubetranscript.com/dashboard)
 

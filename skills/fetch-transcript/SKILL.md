@@ -109,4 +109,4 @@ Every error is JSON with a stable `code` you can branch on:
 
 Report the real `message` field to the user rather than a generic "something went wrong" - it's written to be end-user-readable already.
 
-1 credit per successful call (free tier included); failed calls are never charged.
+1 credit per successful call; failed calls are never charged.
