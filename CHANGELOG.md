@@ -2,7 +2,7 @@
 
 ## 1.1.1 (2026-10-30)
 
-- README pricing table updated to the current plans (Starter $19, Pro $49, Scale $99); the old $5 Monthly and Annual rows were out of date
+- README pricing table now lists the developer plans (Starter $19, Pro $49, Scale $99) next to Monthly and Annual
 - Fixed two cost statements: only `get_credits` is free, and a channel lookup costs 1 credit
 - Sign-up wording now reads "100 credits on sign-up, no card"
 
