@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `fetch-transcript` skill documents `translate` on `get_youtube_transcript` and `GET /transcript`: a machine translation into any language code, timestamps kept aligned, same 1 credit
 - The bundled MCP server gained `get_video_details` (views, likes, upload date, tags) and `get_video_comments` (a page of top comments), 1 credit per call or page. `channel-playlist-research` skill and README list them
 
 ## 1.1.1 (2026-10-30)

@@ -22,11 +22,14 @@ get_youtube_transcript({
   video_url: "<the URL or 11-char video ID the user gave>",
   language: "en",          // optional, defaults to "en" - only set if the user asked for a specific language
   send_metadata: true,      // optional, defaults to true
-  timestamps: false         // optional, defaults to false - set true when the user wants timestamps, wants to find or quote where something is said, or wants a timeline or chapter breakdown
+  timestamps: false,        // optional, defaults to false - set true when the user wants timestamps, wants to find or quote where something is said, or wants a timeline or chapter breakdown
+  translate: "es"           // optional - only when the user wants the text in another language; omit otherwise
 })
 ```
 
 With `timestamps: true`, each caption line comes back on its own line starting with its start time, like `[0:03] some text` (`h:mm:ss` past an hour). Same credit cost.
+
+With `translate` set to a language code (`es`, `zh-CN`, ...), the transcript comes back machine-translated, one caption line at a time so timestamps stay aligned, and the header gains `## Translated to: es (machine translation)`. Same credit cost. Tell the user it is a machine translation, and quote the original when exact wording matters.
 
 `video_url` accepts a bare 11-char video ID or any full YouTube URL (`youtube.com/watch?v=...`, `youtu.be/...`, `/shorts/...`) - pass it through as-is, don't parse it yourself. The MCP session is authenticated by whatever the user set up when they connected the server (API key header or OAuth) - you don't need to attach credentials yourself when calling the tool.
 
@@ -66,7 +69,7 @@ curl -s "https://getyoutubetranscript.com/api/v1/transcript?v=<VIDEO_ID_OR_URL>&
   -H "Authorization: Bearer $YOUTUBE_TRANSCRIPT_API_KEY"
 ```
 
-Add `&timestamps=true` to also get `data.segments`.
+Add `&timestamps=true` to also get `data.segments`. Add `&translate=es` (any language code) for a machine translation; `data.translated_to` then names the target, and `language_code` stays the source track.
 
 Successful response:
 
