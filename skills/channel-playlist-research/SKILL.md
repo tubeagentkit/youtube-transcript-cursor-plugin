@@ -28,6 +28,8 @@ If the `youtube-transcript` MCP server is connected, use whichever tool matches 
 | `get_channel_banner({ channel })` | Banner (original and every crop size) and avatar | 1 credit |
 | `get_related_videos({ video_url })` | The videos YouTube suggests next to a video | 1 credit |
 | `get_video_dislikes({ video_url })` | Estimated likes and dislikes (YouTube no longer publishes dislikes) | 1 credit |
+| `get_video_details({ video_url })` | Views, likes, upload date, length, tags, description and channel | 1 credit |
+| `get_video_comments({ video_url, continuation? })` | A page of top comments; send the same `video_url` with `continuation` for the next page | 1 credit/page |
 | `search_channel_videos({ channel, query \| continuation })` | Search within one channel's videos | 1 credit/page |
 | `list_playlist_videos({ playlist \| continuation })` | Every video in a playlist | 1 credit/page |
 
@@ -47,6 +49,8 @@ Same base URL and auth as `fetch-transcript` (`https://getyoutubetranscript.com/
 | `GET /channel/banner?channel=@mkbhd` | `channel` | 1 credit |
 | `GET /video/related?v=<id or URL>` | `v` | 1 credit |
 | `GET /video/dislikes?v=<id or URL>` | `v` | 1 credit |
+| `GET /video?v=<id or URL>` | `v` | 1 credit |
+| `GET /video/comments?v=<id or URL>` | `v`, plus `continuation` (with the same `v`) | 1 credit/page |
 | `GET /channel/search?channel=@mkbhd&q=iphone` (or `&continuation=`) | `channel`+`q`, or `continuation` | 1 credit/page |
 | `GET /playlist?list=<id or URL>` (or `&continuation=`) | `list` or `continuation` | 1 credit/page |
 

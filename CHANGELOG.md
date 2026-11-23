@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The bundled MCP server gained `get_video_details` (views, likes, upload date, tags) and `get_video_comments` (a page of top comments), 1 credit per call or page. `channel-playlist-research` skill and README list them
+
 ## 1.1.1 (2026-10-30)
 
 - README pricing table now lists the developer plans (Starter $19, Pro $49, Scale $99) next to Monthly and Annual
