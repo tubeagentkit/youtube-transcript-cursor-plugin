@@ -23,13 +23,24 @@ get_youtube_transcript({
   language: "en",          // optional, defaults to "en" - only set if the user asked for a specific language
   send_metadata: true,      // optional, defaults to true
   timestamps: false,        // optional, defaults to false - set true when the user wants timestamps, wants to find or quote where something is said, or wants a timeline or chapter breakdown
-  translate: "es"           // optional - only when the user wants the text in another language; omit otherwise
+  translate: "es",          // optional - only when the user wants the text in another language; omit otherwise
+  mode: "native"            // optional, defaults to "native" (captions only) - "auto" or "generate" for an AI transcript, see below
 })
 ```
 
 With `timestamps: true`, each caption line comes back on its own line starting with its start time, like `[0:03] some text` (`h:mm:ss` past an hour). Same credit cost.
 
 With `translate` set to a language code (`es`, `zh-CN`, ...), the transcript comes back machine-translated, one caption line at a time so timestamps stay aligned, and the header gains `## Translated to: es (machine translation)`. Same credit cost. Tell the user it is a machine translation, and quote the original when exact wording matters.
+
+### Videos with no captions (AI transcripts)
+
+By default a video with no captions returns `TRANSCRIPT_DISABLED` or `TRANSCRIPT_NOT_FOUND`: tell the user instead of guessing what it says. If they still want its text, offer an AI speech-to-text transcript of the audio and quote the cost first: 3 credits per minute of video, rounded up, minimum 3 (a 30-minute video is 90 credits). Then call again with `mode: "auto"` (captions if the video has any, 1 credit, otherwise an AI transcript) or `mode: "generate"` (always an AI transcript).
+
+- Videos up to 4 hours. Live and upcoming streams are refused.
+- With these modes `language` is the language spoken (leave it out to use the video's own audio language) and `translate` is not allowed. `timestamps` works.
+- The header says `## Source: AI speech-to-text transcript` and `## Credits charged by this call`. Tell the user it is an AI transcript: names and technical terms may be misheard.
+- Re-reading your own AI transcript within 24 hours costs 0. Credits are refunded automatically if generation fails.
+- A long video answers with a `job_id` instead of text. Call `get_transcript_job({ job_id, timestamps })` about every 5 seconds until it returns the transcript (polling is free; jobs are kept 7 days).
 
 `video_url` accepts a bare 11-char video ID or any full YouTube URL (`youtube.com/watch?v=...`, `youtu.be/...`, `/shorts/...`) - pass it through as-is, don't parse it yourself. The MCP session is authenticated by whatever the user set up when they connected the server (API key header or OAuth) - you don't need to attach credentials yourself when calling the tool.
 
@@ -71,6 +82,8 @@ curl -s "https://getyoutubetranscript.com/api/v1/transcript?v=<VIDEO_ID_OR_URL>&
 
 Add `&timestamps=true` to also get `data.segments`. Add `&translate=es` (any language code) for a machine translation; `data.translated_to` then names the target, and `language_code` stays the source track.
 
+Add `&mode=auto` (captions if any, otherwise an AI transcript) or `&mode=generate` (always AI) for a video with no captions, at 3 credits per minute of video. The answer adds `caption_type: "ai"`, `source: "ai"` and `duration_seconds`, and the `X-Credits-Charged` header says what the call cost. If generation takes longer than about 20 seconds the answer is `202` with `"data": null` and a `job` (`job_id`, `poll_interval_seconds: 5`): poll `GET /transcript/jobs?id=<job_id>` (free; add `&timestamps=true` for segments) every 5 seconds until it answers `200` with the transcript, or an error if it failed.
+
 Successful response:
 
 ```json
@@ -104,12 +117,16 @@ Every error is JSON with a stable `code` you can branch on:
 | Status | Code | Meaning |
 |---|---|---|
 | 401 | `MISSING_API_KEY` / `INVALID_API_KEY` | No key sent, or it's wrong/revoked |
-| 402 | `PAYMENT_REQUIRED` | Out of credits - direct the user to the dashboard, don't retry |
-| 404 | `VIDEO_UNAVAILABLE` / `TRANSCRIPT_NOT_FOUND` / `TRANSCRIPT_DISABLED` | Video doesn't exist, is private, or has no captions |
+| 402 | `PAYMENT_REQUIRED` | Out of credits, or not enough for the AI transcript (`credits_required` says how many) - direct the user to the dashboard, don't retry |
+| 404 | `VIDEO_UNAVAILABLE` / `TRANSCRIPT_NOT_FOUND` / `TRANSCRIPT_DISABLED` | Video doesn't exist, is private, or has no captions (offer `mode=auto`) |
 | 404 | `LANGUAGE_NOT_AVAILABLE` | The video doesn't have a transcript in the requested language |
+| 404 | `JOB_NOT_FOUND` | No AI transcript job with this id for this account |
+| 422 | `LIVE_STREAM` / `TOO_LONG` / `AUDIO_UNAVAILABLE` | AI transcript refused: live or upcoming stream, over 4 hours, or the audio can't be read. Not charged |
 | 429 | `RATE_LIMITED` | Too many requests for the key's plan tier - back off, don't hammer it in a retry loop |
+| 429 | `TOO_MANY_JOBS` | 5 AI transcripts already in progress - wait for one to finish |
+| 502 | `AI_FAILED` | The AI transcript could not be made; credits were refunded |
 | 503 | `UPSTREAM_UNAVAILABLE` / `UPSTREAM_TIMEOUT` | Transient upstream hiccup - safe to retry once after a short delay |
 
 Report the real `message` field to the user rather than a generic "something went wrong" - it's written to be end-user-readable already.
 
-1 credit per successful call; failed calls are never charged.
+1 credit per successful call (3 credits per minute of video for an AI transcript); failed calls are never charged.

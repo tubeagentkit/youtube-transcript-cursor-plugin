@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- AI transcripts for videos without captions: `get_youtube_transcript` takes `mode` (`native` default, `auto` for captions if any otherwise an AI speech-to-text transcript, `generate` for always AI), 3 credits per minute of video, up to 4 hours. Long videos answer with a `job_id`, polled with the new `get_transcript_job` tool (free). `fetch-transcript` skill documents both and the REST equivalents (`mode`, `GET /transcript/jobs`, the new error codes); README, rule, agent and `summarize-video` cost notes updated
 - `fetch-transcript` skill documents `translate` on `get_youtube_transcript` and `GET /transcript`: a machine translation into any language code, timestamps kept aligned, same 1 credit
 - The bundled MCP server gained `get_video_details` (views, likes, upload date, tags) and `get_video_comments` (a page of top comments), 1 credit per call or page. `channel-playlist-research` skill and README list them
 

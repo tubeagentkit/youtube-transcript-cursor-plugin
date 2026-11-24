@@ -66,7 +66,7 @@ The bundled MCP server (`https://getyoutubetranscript.com/api/mcp`) authenticate
 
 ### MCP server
 
-Bundled via [`mcp.json`](./mcp.json) - the remote [`tubeagentkit/youtube-mcp`](https://github.com/tubeagentkit/youtube-mcp) server, exposing `get_youtube_transcript`, `get_transcript_languages`, `search_youtube`, `get_channel_latest_videos`, `search_channel_videos`, `list_channel_videos`, `list_channel_playlists`, `list_channel_posts`, `get_channel_banner`, `get_related_videos`, `get_video_dislikes`, `get_video_details`, `get_video_comments`, `list_playlist_videos`, and `get_credits`.
+Bundled via [`mcp.json`](./mcp.json) - the remote [`tubeagentkit/youtube-mcp`](https://github.com/tubeagentkit/youtube-mcp) server, exposing `get_youtube_transcript`, `get_transcript_job`, `get_transcript_languages`, `search_youtube`, `get_channel_latest_videos`, `search_channel_videos`, `list_channel_videos`, `list_channel_playlists`, `list_channel_posts`, `get_channel_banner`, `get_related_videos`, `get_video_dislikes`, `get_video_details`, `get_video_comments`, `list_playlist_videos`, and `get_credits`.
 
 ---
 
@@ -103,7 +103,7 @@ Or use the slash commands directly:
 | **Pro** | $49/month | 25,000 credits/month | 400 req/min |
 | **Scale** | $99/month | 60,000 credits/month | 600 req/min |
 
-1 credit = 1 successful request. Failed calls are never charged. Only `get_credits` is free. [Manage billing ->](https://getyoutubetranscript.com/dashboard)
+1 credit = 1 successful request. Failed calls are never charged. AI transcripts of videos without captions (`mode: "auto"` or `"generate"`) cost 3 credits per minute of video. `get_credits` and `get_transcript_job` are free. [Manage billing ->](https://getyoutubetranscript.com/dashboard)
 
 ---
 
